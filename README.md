@@ -1,27 +1,31 @@
-# XML lint hook for pre-commit
+# xmllint format hook for pre-commit
 
-Lint your xml files with xmllint.
+Format your xml files with [xmllint](https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html).
 
 ## Usage
 
-Add the hook to your `.pre-commit-config.yaml` configuraiton:
+Add this hook to your `.pre-commit-config.yaml` configuraiton:
 
 ``` yaml
-  - repo: https://github.com/comkieffer/pre-commit-xmllint.git
+  - repo: https://github.com/lalten/xmllint-format-hook
     rev: 1.0.0
     hooks:
-      - id: xmllint
+      - id: xmllint-format
 ```
 
-For more advanced usage (e.g. validate using a schema), pass the options with the args array:
+You can override the args being used by the hook. The following matches the defaults:
 
 ``` yaml
-  - repo: https://github.com/comkieffer/pre-commit-xmllint.git
+  - repo: https://github.com/lalten/xmllint-format-hook
     rev: 1.0.0
     hooks:
-      - id: xmllint
-        args: [
-          --schema,
-          http://download.ros.org/schema/package_format3.xsd
-        ]
+      - id: xmllint-format
+        args:
+          - --recover # Output any parsable portions of an invalid document.
+          - --format # Reformat and reindent the output.
+          - --noblanks # Drop ignorable blank spaces.
+          - --nsclean # Remove redundant namespace declarations.
+          - --XMLLINT_INDENT # Use a specific indentation string (normally this is an env var)
+          - "    " # Indentation string to use
+
 ```

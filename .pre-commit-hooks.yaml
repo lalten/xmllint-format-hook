@@ -1,9 +1,14 @@
-- id: xmllint
-  name: xmllint
+- id: xmllint-format
+  name: xmllint-format
   description: Lint xml files with xmllint
-  # We pass in the `--noout` flag here instead of via `args` to prevent it
-  # from being overridden. The flag stops xmllint from printing the xml after
-  # running.
-  entry: xmllint --noout
+  entry: /run.sh
   language: docker
   types: [xml]
+  args:
+    - --recover # Output any parsable portions of an invalid document.
+    - --format # Reformat and reindent the output.
+    - --noblanks # Drop ignorable blank spaces.
+    - --nsclean # Remove redundant namespace declarations.
+    - --XMLLINT_INDENT # Use a specific indentation string (normally this is an env var)
+    - "    " # Indentation string to use
+
