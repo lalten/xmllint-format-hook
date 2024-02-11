@@ -1,6 +1,6 @@
 - id: xmllint-format
   name: xmllint-format
-  description: Lint xml files with xmllint
+  description: Format xml files with xmllint
   entry: /run.sh
   language: docker
   types: [xml]
